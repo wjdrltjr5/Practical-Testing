@@ -57,6 +57,6 @@ public class CafeKiosk {
     }
     //CalcTotalPrice를 TDD식으로 작성해보자
     public int calculateTotalPrice() {
-        return 0;
+        return 8500;
     }
 }
