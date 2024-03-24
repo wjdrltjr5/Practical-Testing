@@ -1,6 +1,6 @@
 ## Practical Testing
 
-### 단위 테스트
+### 단위 테스트 #1, #2
 - 단위테스트
 - 수동테스트, 자동화 테스트
 - Junit5,AssertJ
@@ -10,7 +10,7 @@
 -----
 - lombok(사용가이드) @Data, @Setter, @AllArgsConstructor지양 JPA 양방향 연관관계 시 @ToString 순환참조 문제 알아보기
 
-### TDD
+### TDD  #3
 - TDD
 - 레드-그린-리팩토링
 ---
