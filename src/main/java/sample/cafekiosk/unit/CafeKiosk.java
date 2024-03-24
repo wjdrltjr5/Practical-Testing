@@ -36,9 +36,6 @@ public class CafeKiosk {
     public void clear(){
         beverages.clear();
     }
-    public int calculateTotalPrice() {
-        return beverages.stream().mapToInt(Beverage::getPrice).sum();
-    }
 
     public Order createOrder(){
 
@@ -53,9 +50,13 @@ public class CafeKiosk {
     public Order createOrder(LocalDateTime currentDateTime){
         LocalTime currentTime = currentDateTime.toLocalTime();
         if(currentTime.isBefore(SHOP_OPEN_TIME) || currentTime.isAfter(SHOP_CLOSE_TIME)){
-            throw new IllegalArgumentException("주문 시간이 아닙니다. 관리자에게 문의하세요");
+            throw new IllegalArgumentException("" +
+                    "");
         }
         return new Order(currentDateTime, beverages);
     }
-
+    //CalcTotalPrice를 TDD식으로 작성해보자
+    public int calculateTotalPrice() {
+        return 0;
+    }
 }

@@ -8,3 +8,5 @@
 - 경계값 테스트
 - 테스트하기 쉬운/어려운 영역(순수함수)
 - lombok(사용가이드) @Data, @Setter, @AllArgsConstructor지양 JPA 양방향 연관관계 시 @ToString 순환참조 문제 알아보기
+
+### TDD
