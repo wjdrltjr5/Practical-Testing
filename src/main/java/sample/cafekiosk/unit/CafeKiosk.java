@@ -57,6 +57,11 @@ public class CafeKiosk {
     }
     //CalcTotalPrice를 TDD식으로 작성해보자
     public int calculateTotalPrice() {
-        return beverages.stream().mapToInt(Beverage::getPrice).sum();
+//        return beverages.stream().mapToInt(Beverage::getPrice).sum();
+        int totalPrice = 0;
+        for(Beverage beverage : beverages){
+            totalPrice += beverage.getPrice();
+        }
+        return totalPrice;
     }
 }
