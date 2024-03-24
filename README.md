@@ -17,3 +17,10 @@
 - 애자일 vs 폭포수
 - 익스트림 프로그래밍
 - 스크럼,칸반
+
+### 테스트는 []다 #4
+- @DisplayName - 도메인 정책, 용어를 사용한 명확한 문장
+- Given/When/Then - 주어진 환경,행동,상태 변화
+- TDD vs BDD
+---
+- Junit vs Spock
