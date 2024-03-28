@@ -24,27 +24,10 @@ class ProductRepositoryTest {
     @Test
     void test(){
         //given
-        Product product1 = Product.builder()
-                .productNumber("001")
-                .type(HANDMADE)
-                .sellingStatus(SELLING)
-                .name("아메리카노")
-                .price(4000)
-                .build();
-        Product product2 = Product.builder()
-                .productNumber("002")
-                .type(HANDMADE)
-                .sellingStatus(HOLD)
-                .name("카페라떼")
-                .price(4500)
-                .build();
-        Product product3 = Product.builder()
-                .productNumber("003")
-                .type(HANDMADE)
-                .sellingStatus(STOP_SELLING)
-                .name("팥빙수")
-                .price(7000)
-                .build();
+        Product product1 = createProduct("001",HANDMADE,SELLING,"아메리카노",4000);
+        Product product2 = createProduct("002",HANDMADE,HOLD,"카페라떼",4500);
+        Product product3 = createProduct("003",HANDMADE,STOP_SELLING,"팥빙수",7000);
+
         productRepository.saveAll(List.of(product1,product2,product3));
 
         //when
@@ -64,27 +47,10 @@ class ProductRepositoryTest {
     @Test
     void findAllByProductNumberIn(){
         //given
-        Product product1 = Product.builder()
-                .productNumber("001")
-                .type(HANDMADE)
-                .sellingStatus(SELLING)
-                .name("아메리카노")
-                .price(4000)
-                .build();
-        Product product2 = Product.builder()
-                .productNumber("002")
-                .type(HANDMADE)
-                .sellingStatus(SELLING)
-                .name("카페라떼")
-                .price(4500)
-                .build();
-        Product product3 = Product.builder()
-                .productNumber("003")
-                .type(HANDMADE)
-                .sellingStatus(STOP_SELLING)
-                .name("팥빙수")
-                .price(7000)
-                .build();
+        Product product1 = createProduct("001",HANDMADE,SELLING,"아메리카노",4000);
+        Product product2 = createProduct("002",HANDMADE,HOLD,"카페라떼",4500);
+        Product product3 = createProduct("003",HANDMADE,STOP_SELLING,"팥빙수",7000);
+
         productRepository.saveAll(List.of(product1,product2,product3));
         //when
         List<Product> products = productRepository.findAllByProductNumberIn(List.of("001", "002"));
@@ -94,7 +60,42 @@ class ProductRepositoryTest {
                 .extracting("productNumber" , "name","sellingStatus")
                 .containsExactlyInAnyOrder(
                         tuple("001","아메리카노",SELLING),
-                        tuple("002","카페라떼",SELLING)
+                        tuple("002","카페라떼",HOLD)
                 );
+    }
+
+    @DisplayName("가장 마지막으로 저장된 상품번호를 가져온다.")
+    @Test
+    void findLatestProduct(){
+        //given
+        Product product1 = createProduct("001",HANDMADE,SELLING,"아메리카노",4000);
+        Product product2 = createProduct("002",HANDMADE,HOLD,"카페라떼",4500);
+        Product product3 = createProduct("003",HANDMADE,STOP_SELLING,"팥빙수",7000);
+
+        productRepository.saveAll(List.of(product1,product2,product3));
+        //when
+        String latestProductNumber = productRepository.findLatestProduct();
+        //then
+
+        assertThat(latestProductNumber).isEqualTo("003");
+    }
+    @DisplayName("가장 마지막으로 저장된 상품번호를 읽어올때 상품이 하나도 없는 경우 null을 반환한다..")
+    @Test
+    void findLatestProductNumberWhenProductIsEmpty(){
+        //given
+        //when
+        String latestProductNumber = productRepository.findLatestProduct();
+        //then
+
+        assertThat(latestProductNumber).isNull();
+    }
+    private Product createProduct(String productNumber, ProductType type ,ProductSellingStatus status,String name, int price) {
+        return Product.builder()
+                .productNumber(productNumber)
+                .type(type)
+                .sellingStatus(status)
+                .name(name)
+                .price(price)
+                .build();
     }
 }
