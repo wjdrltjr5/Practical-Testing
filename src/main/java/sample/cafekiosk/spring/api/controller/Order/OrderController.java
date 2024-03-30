@@ -1,5 +1,6 @@
 package sample.cafekiosk.spring.api.controller.Order;
 
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;

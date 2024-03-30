@@ -45,3 +45,5 @@
 - Query DSL : 타입체크, 동적처리
 - Optimisic Lock, Pessimisitc Lock
 - CQRS
+
+### Mock을 마주하는 자세
