@@ -25,7 +25,7 @@
 ---
 - Junit vs Spock(BDD 프레임워크)
 
-### 스프링 & JPA 기반 테스트
+### 스프링 & JPA 기반 테스트 #5 #6 #7 #8 #9
 - Layered Architecture
 - 단위 테스트 vs 통합 테스트
 - Ioc, DI, AOP
@@ -46,4 +46,8 @@
 - Optimisic Lock, Pessimisitc Lock
 - CQRS
 
-### Mock을 마주하는 자세
+### Mock을 마주하는 자세 #10
+- Test Double, Stubbing : dummy, fake, stub, spy, mock
+- @Mock, @MockBean, @Spy,@SpyBean,@InjectMocks bean들은 bean등록이 필요할때사용
+- BDDMockito
+- Classist vs Mockist
