@@ -26,3 +26,22 @@
 - Junit vs Spock(BDD 프레임워크)
 
 ### 스프링 & JPA 기반 테스트
+- Layered Architecture
+- 단위 테스트 vs 통합 테스트
+- Ioc, DI, AOP
+- ORM, 패러다임의 불일치, Hibernate
+- String Data JPA
+- @SpringBootTest vs @DataJpaTest
+- @SpringBootTest vs @WebMvcTest
+- @Transactional(readOnly = true)
+- @RestController, @ExceptionHandle
+- Spring bean validation notnull, not empty, not blank
+- @WebMvcTest
+- ObjectMapper
+- Mock, Mockito, @MockBean
+- 
+---
+- Hexagonal Architecture
+- Query DSL : 타입체크, 동적처리
+- Optimisic Lock, Pessimisitc Lock
+- CQRS
