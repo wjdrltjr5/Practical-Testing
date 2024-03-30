@@ -22,6 +22,11 @@ public class MailService {
                             .toEmail(toEmail)
                             .content(content)
                     .build());
+            //@Spy
+            mailSendClient.a();
+            mailSendClient.b();
+            mailSendClient.c();
+
             return  true;
         }
         return false;
