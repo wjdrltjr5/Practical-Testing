@@ -17,7 +17,7 @@ import static sample.cafekiosk.spring.domain.product.ProductSellingStatus.*;
 public class ProductService {
 
     private final ProductRepository productRepository;
-
+    private final ProductNumberFactory productNumberFactory;
     //동시성이슈가 발생할 수 있다.
     public List<ProductResponse> getSellingProducts(){
         List<Product> products = productRepository.findAllBySellingStatusIn(forDisplay());
@@ -29,7 +29,7 @@ public class ProductService {
         // 001,002,003,004
         // DB에서 마지막 저장된 Product의 상품 번호를 읽어와서 +1
 
-        String nextProductNumber = createNextProductNumber();
+        String nextProductNumber = productNumberFactory.createNextProductNumber();
 
         Product product = request.toEntity(nextProductNumber);
         Product savedProduct = productRepository.save(product);
@@ -44,14 +44,5 @@ public class ProductService {
                 .build();
     }
 
-    private String createNextProductNumber(){
-        String latestProductNumber = productRepository.findLatestProduct();
-        if(latestProductNumber == null){
-            return "001";
-        }
-        int latestProductNumberInt = Integer.parseInt(latestProductNumber);
-        int nextProductNumberInt = latestProductNumberInt + 1;
 
-        return String.format("%03d",nextProductNumberInt);
-    }
 }

@@ -51,3 +51,17 @@
 - @Mock, @MockBean, @Spy,@SpyBean,@InjectMocks bean들은 bean등록이 필요할때사용
 - BDDMockito
 - Classist vs Mockist
+
+### 더 나은 테스트를 작성하기 위한 조언
+- 한 문단에 한 주제 : 한가지 테스트에서는 한가지 목적만 검증
+- 완벅하게 제어하기 : ex. 시간과 관련
+- 테스트 환경의 독립성을 보장하자 : 실패하는 부분은 when then / 생성자(빌더) 기반으로 환경 구성
+  (프로덕션 환경에서는 팩토리 메서드 o 뭐 추가 정책./ 테스트 환경에서는 그냥 생성자(빌더))
+- 테스트 간 독립성을 보장하자
+- 한 눈에 들어오는 Test Fixture 구성하기
+- Test Fixture 클렌징
+- @ParameterizedTest 
+- @DynamicTest
+- 테스트 수행도 비용이다 환경통합하기
+- private 메서드의 테스트 : 이런 느낌이 든다면 분리하고 public으로 만들어야 할 수도
+- 테스트에서만 필요한 메서드가 있다면 : 
