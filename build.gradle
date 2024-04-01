@@ -2,6 +2,8 @@ plugins {
 	id 'java'
 	id 'org.springframework.boot' version '3.2.4'
 	id 'io.spring.dependency-management' version '1.1.4'
+	//asciidoctor  AsciiDoc -> html
+	id "org.asciidoctor.jvm.convert" version "3.3.2"
 }
 
 group = 'sample'
@@ -15,6 +17,7 @@ configurations {
 	compileOnly {
 		extendsFrom annotationProcessor
 	}
+	asciidoctorExt
 }
 
 repositories {
@@ -22,21 +25,53 @@ repositories {
 }
 
 dependencies {
+	//spring
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
 	//학습테스트 Guava
 	implementation("com.google.guava:guava:33.1.0-jre")
-
+	//lombok
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
-
+	//h2
 	runtimeOnly 'com.h2database:h2'
-
+	//test
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+	// RestDocs
+	asciidoctorExt 'org.springframework.restdocs:spring-restdocs-asciidoctor'
+	testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
+
+
 
 }
 
 tasks.named('test') {
 	useJUnitPlatform()
+}
+ext { // 전역 변수 스니펫 디렉토리 설정
+	snippetsDir = file('build/generated-snippets')
+}
+
+test { //테스트에 대한 결과물 문서파일을 전역변수에 설정한 snippetsDir 에 넣음
+	outputs.dir snippetsDir
+}
+
+asciidoctor { // 작업순서 설정 테스트 수행후 이 아스키독터 테스크 수행
+		inputs.dir snippetsDir
+		configurations 'asciidoctorExt'
+
+		sources { // 특정 파일만 html로 만든다.
+			include("**/index.adoc")
+		}
+		baseDirFollowsSourceFile() // 다른 adoc 파일을 include 할 때 경로를 baseDir로 맞춘다.
+		dependsOn test
+	}
+
+bootJar { // 마지막 수행 문서를 정적파일로 복사
+	dependsOn asciidoctor
+	from("${asciidoctor.outputDir}") {
+		into 'static/docs'
+	}
 }
